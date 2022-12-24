@@ -1,20 +1,15 @@
 --- 
-title: Think Lab 1189 - Observability of a Hybrid Application Using Instana
-description: Observability of a hybrid application using Instana
+title: Power SKO Instana Lab 
+description: Instana Education for the IBM Power Organization
 ---
 
 ## Introduction
 
-This lab will allow students to learn how to intrument a hybrid application for observability using Instana.  The application consists 
-of a cloud native component running in kubernetes (OpenShift) and a traditional server with IBM MQ and IBM App Connect Enterprise.  
-Once instrumented, students will explore the rich set of monitoring data available to monitor the traditional and cloud native infratructure,
-the application, and the web traffic.  Students will see how Instana can help them get to root cause quickly and in an intuitive way by
-allowing the Instana UI to guide them through the diagnosis.  Students will also learn how to customize the environment and define custom Events.
+This lab is intended to educate the IBM Power organization on Instana.   The lab will focus on a few key areas including the installation and configuration of Agents, learning administrative capabilities, and how to diagnose problems with Instan.  Key sections of the lab include: 
 
-1) In the first portion of the lab, students will instrument kubernetes and IBM ACE and MQ for monitoring.
+1) In the first portion of the lab, students will instrument kubernetes and an AIX LPAR
 
-2) Once instrumented, students will explore key aspects of the Instana user interface.   Part 1 must be completed before proceeding to the second
-portion of the lab.
+2) Next, students will explore the monitoring capabilities of Instana in relation to Power Systems
 
 3) In the 3rd section of the lab, students will perform a diagnostic scenario in the hybrid application
 
@@ -28,22 +23,15 @@ the lab guide within the virtual machine so that you can easily copy and past te
 
 ## Logging into the Environment
 
-  Before beginning the exercises, take the following steps to login to the soleil environment and access the lab environment.
+  For the lab, you will be using the following Instana environment.  Open your browser and login to https://instana-labs.instana.io/
 
-  After opening your browser and logging into the lab, you'll see an image of a two computers.  The first is named thinkdemo. This 
-  server is the kubernetes(OpenShift) cluster where the cloud native portion of the application will run.
+  Students will be logging in with user account apmdemo-1@yahoo.com.   The password will be provided separately to the students at the time of the lab.
 
-  ![](images/skytap.png)
+  As part of the lab, you will be using the AIX LPAR and OpenShift Cluster where you previously setup the Wordpress application and MariaDB.  
 
-  If the background is green, it means the virtual machine is running.  If it is not running, click the start arrow to start the VM
-  ![](images/2021-04-27-20-00-11.png)
+  After successfully logging into the Instana environment, you should see the main landing page that includes a list of Websites & Mobile Applications, Applications, Platforms, Infrastructure, and Events.
 
-  The 2nd VM is named "MQ and ACE".  This VM is a traditional server running IBM MQ and IBM App Connect Enterprise.
-  
-  After the VM is running, click the picture of the **"thinkdemo"** computer to launch the desktop.  Login to the virtual machine as the 
-  user **"demo"** and password **"Passw0rd"**. 
-
-  For more information on using the soleil environment, scroll towards the bottom of the page.
+ ![](images/landingPage.png) 
 
 ## Begin the Exercises
 
@@ -116,28 +104,3 @@ Select **"Installation"** in the upper left corner or select the **"Installing a
 ***
 
 
-## Using the soleil environment
-
-  There are a couple of things that are important to know when using the soleil environment.  At the top of the screen you will see a menu bar.  You'll notice a full screen icon as shown below. You'll have a much better experience with the lab if you use full screen.
-
-  ![](images/2021-04-27-20-24-32.png)
-
-  Another icon on the taskbar that is important is the clipboard icon
-
-  ![](images/2021-04-28-10-47-13.png)
-
-  The only way to paste content into the virtual machine is by using this icon.
-
-  To copy text into the virtual machine, perform a copy as you normally would do on your laptop/desktop.  Then, click the clipboard icon. You will notice that there is text within the clipboard user interface
-
-  ![](images/2021-04-27-20-40-37.png)
-
-  This will make the text available within the virtual machine. Then, within the virtual machine, either type "Ctrl-V" or right-click and use your browser to paste the text into the virtual machine.
-
-  To copy text from the virtual machine, do the process in reverse.  Copy the text inside the virtual machine.  Then, click the clipboard icon and you will notice that the text is visible on the screen.
-
-  ![](images/2021-04-27-20-40-37.png)
-
-  Whatever text you see on the VM clipboard, you'll be able to past within your laptop/desktop.
-
-  Note:  The clipboard is a little bit unreliable.  You may need to attempt to copy/paste a couple of timess.  Also, try to avoid clicking in multiple places on the screen. Copy the content (Ctrl-C), click on the clipboard, then immediately paste to either your laptop or into the virtual machine.

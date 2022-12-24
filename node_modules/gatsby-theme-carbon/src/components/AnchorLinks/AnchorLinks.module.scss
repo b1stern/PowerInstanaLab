@@ -1,0 +1,47 @@
+.list {
+  width: 100%;
+  --space: 32px;
+
+  @include carbon--breakpoint('lg') {
+    width: 66.67%;
+  }
+}
+
+.list + * {
+  --space: 72px;
+}
+
+.link {
+  @include carbon--type-style('expressive-heading-03', true);
+  position: relative;
+  display: inline-block;
+  transition: color $transition--base;
+  color: currentColor;
+  text-decoration: none;
+  margin-bottom: $spacing-03;
+  margin-left: $spacing-06;
+
+  &:hover {
+    color: $link-01;
+  }
+
+  &:before {
+    content: '\21B3'; //"↳"
+    position: absolute;
+    left: -$spacing-06;
+    color: currentColor;
+    cursor: pointer;
+  }
+}
+
+.list--small .link {
+  @include carbon--type-style('body-long-02');
+  margin-bottom: 0;
+}
+
+// Multiple Columns
+.multiple-columns {
+  @include carbon--breakpoint('md') {
+    column-count: 2;
+  }
+}
