@@ -1,0 +1,14 @@
+- title: Intro and Login
+  pages:
+    - path: /
+- title:  IBM Middleware Instana Lab
+
+  pages:
+    - title: Installation
+      path: /tutorials/Install
+    - title: Explore Instana
+      path: /tutorials/Explore
+    - title: Diagnosing Problems
+      path: /tutorials/Diagnose
+    - title: Instana Administration
+      path: /tutorials/Administration

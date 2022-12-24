@@ -1,0 +1,288 @@
+---
+title: Section 4 - Administer Instana
+description: Perform Administrative Functions with Instana
+---
+
+<AnchorLinks>
+  <AnchorLink>4-1: Create an Analytics Based Smart Alert</AnchorLink>
+  <AnchorLink>4-2: Create a Static Threshold (Event)</AnchorLink>
+  <AnchorLink>4-3: Setup an Alert for the New Event</AnchorLink>
+  <AnchorLink>4-4: Summary</AnchorLink>
+</AnchorLinks>
+
+# 4-1:  Create an Analytics Based Smart Alert
+
+In this section, students are going to create an analytics based **"Smart Alert"** to detect abnormal behavior within an application.
+
+If you haven't already done so, open a the chrome browser to the Instana tab and make sure you are logged in. The login credentials can be found on the **"accounts"** browser tab.
+
+Click on Applications.  Then, select the **"Quote of the Day"** application. 
+
+Note, you can't use the application that you just installed for Analytics based threshold because
+there isn't enough historical data.
+![](images/applicationsQOTD.png)
+
+
+Click on **"Add Smart Alert"** in the lower right corner.
+
+![](images/smartAlert.png)
+
+
+There is a simple and an advanced mode.  We'll be using the advanced mode which allows you to see all of the capabilities.
+
+In the upper right corner of the dialog, select **"Switch to Advanced Mode"**
+![](images/advanced.png)
+
+In the upper left corner, you'll see that there are 4 different types of **Smart Alerts**
+- Slow Calls
+- Erroneous Calls
+- HTTP Status Codes
+- Throughput
+
+Leave the default of **"Slow Calls"**
+![](images/slowCalls.png)
+
+Scroll down.  You'll see that there are number of options to determine which calls you want to analyze.  
+- You can analyze the calls for this application or you can analyze specific services or endpoints.
+- You can analyze **Inbound Calls** or **All Calls**
+- You can include **Internal Calls**
+- You can include **Synthetic Calls**
+
+![](images/options4.png)
+
+Leave the default settings.
+
+Scroll down further until you see the widgets show in the screen capture below.
+![](images/options2.png)
+
+You'll notice that there are a variety of options including:
+- The ability to change the percentile that is used for the evaluation
+- The type of seasonality (static, daily, or weekly)
+- whether you want to view the last 24 hours or 7 days of historical data
+- Sensitivity.
+
+Try out some of the options.  In particular, move the slider for sensitivity.  Notice that when you set it to higher sensitivity, the number of red triangles show on the screen will change.
+These red triangles indicate when thresholds would trigger if you had chosen that setting.
+![](images/sensitivity.png)
+
+Choose an appropriate value for the sensitivity.  You don't want to receive a lot of alert by setting the sensitivity too high.  Usually, if you see more than 1 or two alerts per day,
+the sensitivity is probably too high.  But, it depends on the historical data that you're looking at and the mission criticality of the application.
+
+Scroll down further.
+![](images/options3.png)
+
+You'll see that there are options for persistence over time.  This ensures that the conditions trigger for a reasonable length of time before an alert is raised.  
+
+There is also an option to select an **"Alert Channel"**.  An **"Alert Channel"** is a way to notify people about the event via different channels such as e-mail, slack, Watson AIOPs, etc.
+
+Select the **"Select Alert Channels"** option.  A dialog will open with a few different **Alert Channels**.  Select one or more channel.  For example, have the alerts sent to the SRE slack channel.
+
+Click on the **"Create Alert Channel"** link in the upper right corner.
+
+Click on the dropdown list for the **"Alert Channel type"**.
+![](images/selectChannels.png)
+
+You will see a list of all of the **"Channel"** options.  You can setup Alert Channels to slack, e-mail, Watson AIOps, splunk, and more.  There is also a **"Generic Webhook"** option that allows you
+to integrate with a variety of 3rd party products that support webhooks.
+![](images/channelOptions.png)
+
+
+Don't bother saving your changes.  We just wanted to allow you to see your options for setting up **"Smart Alerts"** and **"Alert Channels"**
+
+Click the **"Cancel"** button at the bottom of the dialog.
+
+Click **"Cancel"** two more times to close the **"Smart Alert"** dialog.
+
+
+
+# 4-2:  Create a Static Threshold (Event)
+Now, let's examine how a more traditional threshold is created and used in conjunction with Alert Channels.
+
+On the left side of the screen, select the **"Settings"** gear.
+![](images/events.png)
+
+The Settings menu provides access to most of the administrative tasks within Instana.  You'll notice menus for Events, Alerts, Alert Channels, API Tokens, Users, Groups, Log Managemnet Integration, and more
+
+Select **"Events"**
+
+Once you click on **"Events"**, you will see a list of 300+ Events that are defined as out of the box thresholds within Instana.  If you want to filter the list, you can do that in a number of ways
+via the drop down lists at the top of the page.
+![](images/filterEvents.png)
+
+Notice that you can filter based on the Event type, severity, entity type, state, or simply enter a keyword filter.
+
+Let's select **"Entity Type"**
+
+Select the **"Entity Type"** dropdown list and type **"IBM MQ"** into the field.  You'll notice that a few different options show up. Each of the options is an Entity Type.  You can filter 
+on the Events related to the IBM MQ Queue Manager, Queue, Channel, etc.
+
+Select **"IBM MQ Queue Manager"** from the dropdown list.
+![](images/qmEvents.png)
+
+This will filter the Events to the list of Events that are written against the IBM MQ Queue Manager entity type.  There are several out of the box threshold Events that will detect things like
+channel initiator status, queue manager status, publish/subscribe engine status, and more.
+
+Let's create a new Event.
+
+At the top of the screen, select the **"+ New Event"** link.
+![](images/newEvent.png)
+
+Fill in the following information for you new Event:
+- Give your Event a name.  Use your **student name** when creating the Event as seen below.
+- Enter a description for the Event
+- Select a severity (Warning or critical)
+- Select the option of whether you want your Event to get correlated into Incidents
+- Select a Grace Period.   
+![](images/newEvent1.png)
+
+The Grace Period is a capability that allow you to avoid getting multiple alerts during flapping.  Let's say you are monitoring for high CPU utilization on a server.  If CPU utilization goes High, 
+then Low, then High over a short period of time, you typically only want to see **ONE** event.  By setting a "Grace Period" of something like 60 seconds, you would only receive 1 Event during that interval.
+
+Now, scroll down a little further and fill in the remaining options.
+
+In the **"Condition"** section, select the dropdown and choose **"Built-in Metrics"**.  Most of your thresholds will be written against these **Built-in Metrics**.  
+![](images/newEvent2.png)
+
+The choice of "Custom metrics" would only apply to custom metrics that are being fed into Instana.  The "System Rules" are a specialized set of rules for doing thing like detecting that an 
+entity is **"offline"**.
+
+Once you select **"Built-in Metrics"** another dropdown list will appear.  The new dropdown list is asking for the **"Entity type"** that you are going to write your threshold against.
+
+In the **"Entity type"** dropdown, select **"IBM MQ Queue"**.  Notice that you can type in letters such as "IBM MQ" to filter the list.
+![](images/newEvent3.png)
+
+After specifying an **"Entity type"**, a new dropdown appears with a list of available **"Metrics"**.  Select the **"Metric"** dropdown and choose **"Depth > Queue Depth Percentage"**.
+![](images/newEvent4.png)
+
+After making your select, some new dropdowns appear on the screen looking for the following information:
+- Time Window:  This is the duration that you want to monitor and evaluate
+- Aggregation:  Since Instana is capture data at a high interval, you can use Min, Max, Avg, Sum as part of your evaluation.  
+- Operator: What type of evaluation do you want to do (>, < =, etc.)
+- Percentage - This field is actually different depending on the metric you are evaluating. In this case, you are evaluating a metric that is a percentage.
+
+In the dropdowns, choose **"60 s"** for the time window, **"max"** for the Aggregation, **">"** for the Operator, and **"90"** for the Percentage.
+![](images/newEvent5.png)
+
+Now you have to select the **"Scope"** that this threshold will apply to.  Select the dropdown list.
+![](images/allEntities.png)
+
+In the dropdown list, you'll see the following options:
+- You have the option of applying this threshold to an **"Application Perspective"**. This would limit the scope of the threshold to a specific application.
+- You can use a **"Dynamic Focus Query"** to filter to a specific list of MQ Queues.
+- Or, you can have your threshold apply to **"All Available Entities"**.
+
+Let's make this a global Event and choose the **"All Available Entities"** option.
+
+Click the **"Create"** button to save your new Event.
+
+
+# 4-3:  Setup an Alert for the New Event
+Now that you have a new Event defined, you need to define and Alert.  Alerts are used to notify people and teams via various Alert Channels.  You previously
+reviewed the options for Alert Channels.  The Alerts will be sent to one or more Alert Channels that you select.
+
+Select **"Settings"** on the left side navigation.  Then select **"Alerts"** 
+![](images/alerts.png)
+
+Click on the **"+ New Alert"** link 
+![](images/newAlert.png)
+
+Give the new **"Alert"** a name.  To ensure you can find your **"Alert"**, call it your **"student name"**
+
+Select the dropdown labeled **"Alert on Event(s)"**
+![](images/alertOnEvents.png)
+
+You will see that there are multiple options.  You can setup an Alert for a particular Entity Type.  For example, you might setup an Alert for all Oracle Database Events.
+
+In your case, select **"Alert on Event(s)"**.  This option allows you to select a specific list of Events to forward to an Alert Channel(s).
+
+Further down on the page, select the **"Add Events"** link.
+![](images/addEvent.png)
+
+Initially, you will see a list of ALL Events.
+
+Let's filter the list to just a specific **Entity Type**.   Select the **"Entity Type"** dropdown list and select **"IBM MQ Queue"**
+![](images/filterQueue.png)
+
+You will now see a filtered list of Events related to IBM MQ Queues.   Find the Event with your **"student name"** and select the checkbox.   Then, select the **"Add 1 Event"** button at the bottom.
+![](images/chooseEvent.png)
+
+You will now see the 1 selected Event listed.  Further down on the screen you will see a **"Scope"** section.  This determines which Entities this Alert will apply to.
+![](images/scope.png)
+
+Select the **"Apply on"** dropdown list. You'll see that you can choose one of 3 options:
+- Application Perspective:  This option allows you to limit the scope of the alert to a specific application.
+- Selected Entities Only:  You use the dynamic focus queries to filter to a specific set of Entities
+- All Available Entities:  The Alert would apply to any Entity that triggered the Event threshold.
+
+Select the **"Selected Entities Only"** option
+![](images/selectedEntities.png)
+
+A new widget will appear on the right side of the screen asking you to specify the **"Dynamic Focus Query"**
+
+In the entry field, enter the lucene query that will filter to the queue that is used for the **Quote of the Day** application.  Enter the following value:
+```sh
+entity.ibmmq.queue.name:CP4I.DEMO.API.Q
+```
+![](images/CP4I.DEMO.API.Q.png)
+
+These lucene queries can be complex sequences of AND and OR statements.  In this case, we are looking for 1 specific queue.
+
+Next, click on the **"+ Add Alert Channels"** link
+![](images/alertChannel.png)
+
+A dialog will open with a list of available **"Alert Channels"**.  Since this is an MQ related Event, select the **"MQ Admins"** Alert Channel.
+
+Then, click the **"Add 1 Channel"** button.
+![](images/selectChannel.png)
+
+Scroll down to the bottom. You will see an optional section where you can add custom payloads by adding Key/Value pairs.  We're going to skip that section.
+
+Finally, click the **"Create"** button to save your Alert.
+![](images/saveAlert.png)
+
+That completes this section of the lab.
+
+# 4-4:  Summary
+
+At this point, you have created an Event and an Alert for that Event.  The next time the custom **"Event"** that you created triggers, an **"Alert"** will be sent to the **"MQ Admins"** Alert Channel.  In this case, a slack notification will be posted to a slack channel being monitored by the MQ Admins.
+
+In this section of the lab, you learned how to create a Smart Alert, a traditional Alert (Event), and learned this Alerts are routed to the correct people/teams via Alert Channels.
+
+
+If you haven't completed all of the sections, you can continue other portions of the lab. Select one of the lab exercises in the upper left corner or select one of the images below.
+
+
+<Row>
+
+<Column colLg={4} colMd={4} noGutterMdLeft>
+<ArticleCard
+    color="dark"
+    subTitle="Explorer Instana"
+    title="Explore the Instana UI and Capabilities"
+    href="/tutorials/Explore"
+    actionIcon="arrowRight"
+    >
+
+![](images/InstanaTopology.png)
+
+</ArticleCard>
+</Column>
+
+<Column colLg={4} colMd={4} noGutterMdLeft>
+<ArticleCard
+    color="dark"
+    subTitle="Diagnose a Problem"
+    title="Learn How Instana Can Help you Quickly Diagnose a Complex Problem"
+    href="/tutorials/Diagnose"
+    actionIcon="arrowRight"
+    >
+
+![](images/instanaEvents.png)
+
+</ArticleCard>
+</Column>
+
+</Row>
+
+
+***
