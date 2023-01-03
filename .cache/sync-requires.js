@@ -5,6 +5,7 @@ const preferDefault = m => (m && m.default) || m
 
 
 exports.components = {
+  "component---cache-dev-404-page-js": (preferDefault(require("/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/.cache/dev-404-page.js"))),
   "component---src-pages-404-js": (preferDefault(require("/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/src/pages/404.js"))),
   "component---src-pages-contributions-mdx": (preferDefault(require("/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/src/pages/contributions.mdx"))),
   "component---src-pages-index-mdx": (preferDefault(require("/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/src/pages/index.mdx"))),

@@ -49,6 +49,9 @@ Type "ls -all" and confirm that you see a java8 directory.
 Next, we must make sure that the java 8 JDK is in our PATH and that JAVA_HOME is set properly so that the Instana Agent uses the proper version of java.  There are multiple ways to achieve this.  For example, you can edit the Instana startup files or the setenv file.  For this lab, we are going to edit root's .profile
 
 As the root user, type "cd" to change to root's home directory.
+```sh
+cd
+```
 
 Next, type "vi .profile":
 ```sh
@@ -71,6 +74,14 @@ Finally, you must source the .profile file in order to set those environment var
 . ./.profile
 ```
 
+To confirm that the environment variables are set correctly, type the following:
+```sh
+echo $JAVA_HOME
+echo $PATH
+```
+
+Confirm that you see **/opt/java8/jre** in both the **JAVA_HOME** and **PATH** environment variables.
+
 ***
 
 ## 1-3:  Install the Instana Agent on AIX
@@ -90,9 +101,9 @@ Next, click the **"Deploy Agent"** button near the upper right corner.
 A window will open with a list of different environments where you can install the Instana Agent.  In this section of the lab, we are installing the AIX Host Agent.  Select **Unix** from the list of OS's.
 
 Next select the dropdown list in the middle of the page.  Select "**AIX (64bit - PowerPC)**" and then click the **Download** button to download the Host Agent.
-  ![](images/AIXDyanmic.png)
+  ![](images/AIXDynamic.png)
 
-You'll notice that there are multiple options for AIX.  In this environment, we are using a 64-bit version of AIX.  In addition, there is an option for a "**static**" Agent.  Static Agents are used when you are in an air-gapped environment or when there are strict change control processes.  The **dynamic** agents are recommended for most environments.  The sensors for the discovered technologies will automatically download as needed and the Agent and sensors will automatically update themselves as new fixes and enhancements become available.
+You'll notice that there are multiple options for AIX.  In this environment, we are using a 64-bit version of AIX.  In addition, there is an option for a "**static**" Agent.  Static Agents are used when you are in an air-gapped environment or when there are strict change control processes.  The **dynamic** agents are recommended for most environments.  The sensors for the discovered technologies will automatically download as needed and the Agent and sensors will automatically update themselves as new fixes and enhancements become available.  This lowers your total cost of ownership.
 
 The reason that you downloaded the Host Agent from the Instana user interface is that the media has specifically been configured so that the Agent will communicate and send data to your Instana server.  This includes the path to the Instana server as well as the Agent Key necessary to communicate with your backend server.
 
@@ -101,8 +112,9 @@ Now that you have download the Agent tar file, you must copy it to the AIX LPAR.
 ```sh
 scp instana-agent-aix-ppc-64bit.tar.gz root@<IP address of AIX LPAR>:/tmp
 ```
+Replace \<IP address of AIX LPAR\> with the IP address of the AIX LPAR.
  
-cd to the /opt/ directory.
+cd to the /opt directory.
 ```sh
 cd /opt
 ```
@@ -204,6 +216,8 @@ You should see your AIX Host Agent show up within the zone name that you specifi
 ***
 
 ## 1-4:  Install the Instana Agent to Monitor OpenShift
+In this lab, we will be installing the Instana Agent into an OpenShift on Power cluster.  You will be using the same cluster that you used in previous labs during the Tech Academy.
+
 **Leave the Terminal window open**, but select the browser and navigate to the tab containing the Instana user interface.   
 
 Select the "Stan" the robot icon in the upper left corner
@@ -219,7 +233,7 @@ Select the dropdown list next to the word **"Technology"**.  Notice that there a
   ![](images/yaml.png) 
 
 
-Enter a name for the Cluster and Zone as seen below.  Use **your name** for the **"Cluster name"** and **your student name** for the **"Zone name"**.  This will allow you to find your Agent and Kubernetes Cluster within the user interface and not get confused by data coming in from other students.
+Enter a name for the Cluster and Zone as seen below.  Use **your name** for the **"Cluster name"** and **your name** for the **"Zone name"**.  This will allow you to find your Agent and Kubernetes Cluster within the user interface and not get confused by data coming in from other students.
   ![](images/ZoneCluster.png) 
 
 Next, click the "Download" button to download the yaml file.  The yaml file has been configured specifically to connect to your Instana SaaS environment and will contain the **Cluster** name 
@@ -250,7 +264,7 @@ The installation process is nearly identical for other versions of kubernetes.
  oc project instana-agent
  ```
 
- Type the following command to setup the proper permissions:   
+ Type the following command to setup the proper permissions.  Instana is attempting to monitor the entire cluster and needs access to all projects/namespaces.   
  ```sh
  oc adm policy add-scc-to-user privileged -z instana-agent
  ```
