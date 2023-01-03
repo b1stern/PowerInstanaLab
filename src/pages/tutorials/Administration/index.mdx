@@ -19,8 +19,8 @@ If you haven't already done so, open a the chrome browser to the Instana tab and
 
 Click on Applications.  Then, select the **"Quote of the Day"** application. 
 
-Note, you can't use the application that you just installed for Analytics based threshold because
-there isn't enough historical data.  You could create a SmartAlert, but some functionality would not be available.
+Note: You can't use the application that you just installed for Analytics based thresholds because
+there isn't enough historical data.  You could create a SmartAlert, but some functionality would not be available.  That's why we are using the **Quote of the Day** application.
 ![](images/applicationsQOTD.png)
 
 
@@ -44,11 +44,11 @@ Leave the default of **"Slow Calls"**
 ![](images/slowCalls.png)
 
 Scroll down.  You'll see that there are number of options to determine how you want to define the SmartAlert.   These options include:
-- Setting up a **Static** or an **Adaptive** SmartAlert. 
-- You can analyze the calls for this application or you can analyze specific services or endpoints.
+- Setting up a **Static** or **Adaptive** SmartAlerts. 
+- You can analyze the calls for this **application** or you can analyze specific **services** or **endpoints**.
 - You can analyze **Inbound Calls** or **All Calls**
-- You can include **Internal Calls**
-- You can include **Synthetic Calls**
+- You can include or exclude **Internal Calls**
+- You can include or exclude **Synthetic Calls**
 
 ![](images/options4.png)
 
@@ -57,9 +57,9 @@ In your spare time, you can explore various capabilities.   For the lab, let's c
 
 This will cause Instana to leverage baselines that are established so that you can detect abnormal behavior.   Each service will be evaluated independently.
 
-Scroll down further and you'll see an option to **add filter**.   This would allow you to add a filter to analyze and alert on a subset of the services and calls.
+Scroll down further and you'll see an option to **add filter**.   This would allow you to add a filter to analyze and alert on a subset of the services and calls.  For this lab, we won't be adding a filter and will be analyzing all **services**.
 
-Below that, you'll see an option to specify a percentile for latency.   Specify a percentile of 95%.   
+Below that, you'll see an option to specify a percentile for latency.   Specify a percentile of **95%**.   
 
 Below the percentile, you'll see that there is a slider that allows you to adjust the **sentitivity**.  In order to see the effects of the **percentile** and **sensitivity**, you must first select a specific service where you can preview the results of your settings.  
 
@@ -77,7 +77,7 @@ You'll see that there are options for persistence over time.  This ensures that 
 
 There is also an option to select an **"Alert Channel"**.  An **"Alert Channel"** is a way to notify people about the event via different channels such as e-mail, slack, Watson AIOPs, etc.
 
-Select the **"Select Alert Channels"** option.  A dialog will open with a few different **Alert Channels**.  Select one or more channel.  For example, have the alerts sent to the SRE slack channel.
+Select the **"Select Alert Channels"** option.  A dialog will open with a few different **Alert Channels**.  Select the **IT Operations** Alert Channel.  This channel will send email to the **IT Operations** team.
 
 Click on the **"Create Alert Channel"** link in the upper right corner.
 
@@ -88,18 +88,26 @@ You will see a list of all of the **"Channel"** options.  You can setup Alert Ch
 to integrate with a variety of 3rd party products that support webhooks.
 ![](images/channelOptions.png)
 
+For the lab, we won't be creating a new channel.  We just wanted you to see the options.    
+
+At the bottom of the screen click the **Cancel** button.
+![](images/cancel.png)
+
+Back on the list of alert channels, click the **Add 1 Channel** button to add the **IT Operations** Alert Channel to your SmartAlert.
+![](images/addChannel.png)
+
 Below the Alert Channels, you'll see that you can specify **Alert Properties**.  This allows you to customize the **Alert** message content, severity, and whether or not the Alert will trigger an **Incident**.  Below you can see an example of customized **Alert Properties**
 ![](images/smartAlert4.png)
 
 The option to trigger an **Incident** is important.  Sometimes, you just want to receive raw Events/Alerts when problems occur.  Other times, you want the **Events/Alerts** to be correlated into an **Incident**.  This option allows you to choose where the Alert shows up on the **Event** view.
 ![](images/incidents.png)
 
+Finally, at the very bottom of the screen, you will see an option to create a **Custom Payload**.  This option allows you to customize the Event content that is forwarded to the specified Alert Channels.  Feel free to explore **Custom Payloads** on your own.
+
 
 Don't bother saving your changes.  We just wanted to allow you to see your options for setting up **"Smart Alerts"** and **"Alert Channels"**
 
-Click the **"Cancel"** button at the bottom of the dialog.
-
-Click **"Cancel"** two more times to close the **"Smart Alert"** dialog.
+Click **"Cancel"** at the bottom of the screen until the **"Smart Alert"** dialog closes.
 
 ***
 
@@ -137,10 +145,10 @@ At the top of the screen, select the **"+ New Event"** link.
 
 Fill in the following information for you new Event:
 - Give your Event a name.  Use your **your name** when creating the Event as seen below.
-- Enter a description for the Event
-- Select a severity (Warning or critical)
+- Enter a **description** for the Event.  For example, **"Test Event"**.
+- Select a **severity** (Warning or critical)
 - Select the option of whether you want your Event to get correlated into Incidents
-- Select a Grace Period.   
+- Select a **Grace Period**.   
 ![](images/newEvent1.png)
 
 The Grace Period is a capability that allows you to avoid getting multiple alerts during flapping.  Let's say you are monitoring for high CPU utilization on a server.  If CPU utilization goes High, 
@@ -151,8 +159,7 @@ Now, scroll down a little further and fill in the remaining options.
 In the **"Condition"** section, select the dropdown and choose **"Built-in Metrics"**.  Most of your thresholds will be written against these **Built-in Metrics**.  
 ![](images/newEvent2.png)
 
-The choice of "Custom metrics" would only apply to custom metrics that are being fed into Instana.  The "System Rules" are a specialized set of rules for doing thing like detecting that an 
-entity is **"offline"**.
+The choice of **Custom metrics** would only apply to custom metrics that are being fed into Instana.  The **System Rules** are a specialized set of rules for doing thing like detecting that an entity or Host is **"offline"**.
 
 Once you select **"Built-in Metrics"** another dropdown list will appear.  The new dropdown list is asking for the **"Entity type"** that you are going to write your threshold against.
 
@@ -181,7 +188,7 @@ Select the dropdown list.
 
 In the dropdown list, you'll see the following options:
 - You have the option of applying this threshold to an **"Application Perspective"**. This would limit the scope of the threshold to a specific application.
-- You can use a **"Dynamic Focus Query"** to filter to a specific list of MQ Queues.
+- You can use a **"Dynamic Focus Query"** to filter to a specific list of entities.
 - Or, you can have your threshold apply to **"All Available Entities"**.
 
 Let's make this a global Event and choose the **"All Available Entities"** option.
