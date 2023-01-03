@@ -22,6 +22,7 @@ Run the following command to switch to root:
 sudo -i
 ```
 
+***
 
 ## 1-2:  Preparing to Install the Instana Agent
 On some platforms, the Instana Host Agent comes pre-packaged with a Java SDK.  But, on AIX java is not include in the installation package.  So, the first step is to install java on the AIX LPAR.  Instana supports multiple vendor SDKs, but does require java 8 or 11.
@@ -70,6 +71,7 @@ Finally, you must source the .profile file in order to set those environment var
 . ./.profile
 ```
 
+***
 
 ## 1-3:  Install the Instana Agent on AIX
 Next, we'll be installing the Instana Agent on the AIX LPAR.
@@ -199,6 +201,8 @@ Open the Instana UI and select the Infrastructure view
 You should see your AIX Host Agent show up within the zone name that you specified.   Sometimes it take a few minutes before the Agent moves from the **undefined** zone to the zone name that you specified.
 
 
+***
+
 ## 1-4:  Install the Instana Agent to Monitor OpenShift
 **Leave the Terminal window open**, but select the browser and navigate to the tab containing the Instana user interface.   
 
@@ -264,9 +268,7 @@ This will provide a list of the pods that are in this namespace (project).  Noti
 
 If the pod is not running, wait a minute and issue the "oc get pods" command again.
 
-
-
-
+***
 
 ## 1-5: Summary
 
