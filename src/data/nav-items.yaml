@@ -1,10 +1,10 @@
 - title: Intro and Login
   pages:
     - path: /
-- title:  IBM Middleware Instana Lab
+- title:  Hybrid Cloud Tech Academy Instana Lab
 
   pages:
-    - title: Installation
+    - title: Agent Installation
       path: /tutorials/Install
     - title: Explore Instana
       path: /tutorials/Explore
