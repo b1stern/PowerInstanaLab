@@ -28,7 +28,7 @@
           "name": "/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
             "sourceMap": true,
-            "autoLabel": true,
+            "autoLabel": false,
             "plugins": [],
             "labelFormat": "[local]",
             "cssPropOptimization": true
@@ -77,7 +77,7 @@
           "name": "/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
             "sourceMap": true,
-            "autoLabel": true,
+            "autoLabel": false,
             "plugins": [],
             "labelFormat": "[local]",
             "cssPropOptimization": true
@@ -126,7 +126,7 @@
           "name": "/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
             "sourceMap": true,
-            "autoLabel": true,
+            "autoLabel": false,
             "plugins": [],
             "labelFormat": "[local]",
             "cssPropOptimization": true
@@ -175,7 +175,7 @@
           "name": "/Users/bstern/tivoli/Best_Practices/PowerInstanaLab/PowerInstanaLab/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
             "sourceMap": true,
-            "autoLabel": true,
+            "autoLabel": false,
             "plugins": [],
             "labelFormat": "[local]",
             "cssPropOptimization": true
