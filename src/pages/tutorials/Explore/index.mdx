@@ -23,7 +23,7 @@ Login as apmdemo-2@yahoo.com and the password provided by your instructor.
 In this section of the lab, we'll explore how Instana can be used to monitor the PowerVM infrastructure.  This includes monitoring AIX LPARs, Linux LPARs, IBM i LPARs and the Power infrastructure via the HMC.
 
 Select **Infrastructure** on the left size of the Instana UI.
-  ![](images/kubernetes.png)
+  ![](images/infrastructure.png)
 
 In the Infrastructure view, you will notice that there are several key Power resources.  You'll see a Zone named **IBM i** that contains an IBM i LPAR that is running DB2.  You will also see a zone named **pLinux** that contains a Linux LPAR running on Power.  You should also see the nodes that makeup your OCP Cluster and your AIX LPAR with the Zone names that you specified during the installation.
 
@@ -41,14 +41,16 @@ You will see a list of HMC's that are being monitored.  In this environment, the
 Select the blue link to drill into the HMC.
 
 You will now see a list of the 3 systems that are being managed by this HMC and a summary of the systems.
-  ![](images/systems.png)
+  ![](images/HMC3.png)
 
 Click on the blue link for the last server.  This system is the most interesting because it has the most LPARs.
 
 You should now see a detailed page showing the configuration and performance of this Power server.  Explore the metrics on the page.  Notice that there are multiple tabs at the top of the screen.  Explore the **Logical Partition** and **Virtual I/O Server** tabs.  
   ![](images/system.png)
 
-On the Logical Partition screens, notice that there are multiple tabs at the of the screen for **Summary**, **Network**, and **Storage**.  You'll see that key LPAR information such as the entitled processor information and whether the LPAR is capped or uncapped is captured.
+On the Logical Partition screen, you will initially see a list of LPARs.  Select one of the LPARs and drill into the details.  Notice that there are multiple tabs at the of the screen for **Summary**, **Network**, and **Storage**.  You'll see that key LPAR information such as the entitled processor information and whether the LPAR is capped or uncapped is captured.
+
+Navigate back to the physical server and select the **Virtual I/O Server** tab.  You'll see a list of VIOS LPARs.  Select one of the VIOS LPARs and drill into the details.
 
 The **Virtual I/O Server** is one of the most important things to examine.  If the Virtual I/O Server is low on I/O resources, it can impact the performance of the LPARs that use the VIOS.  Drill into one of the Virtual I/O Servers and examine the data on the **Network** and **Storage** tabs.  You'll see key information including the **Shared Ethernet Adapters**, **SR-IOV**, **Fibre Channel Adapters**, **Shared Storage Pools**, and more.
   ![](images/VIOS.png)
