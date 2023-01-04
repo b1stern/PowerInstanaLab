@@ -17,7 +17,7 @@ description:
 In this portion of the lab, you will explore some key Instana capabilities including monitoring of PowerVM, kubernetes, monitoring of applications, and monitoring of infrastructure.
 
 If you haven't already done so, login to the Instana user interface via a browser.  Use the following URL:  https://instana-labs.instana.io/
-Login as apmdemo-1@yahoo.com and the password provided by your instructor.
+Login as apmdemo-2@yahoo.com and the password provided by your instructor.
 
 ## 2-1: Explore PowerVM Monitoring
 In this section of the lab, we'll explore how Instana can be used to monitor the PowerVM infrastructure.  This includes monitoring AIX LPARs, Linux LPARs, IBM i LPARs and the Power infrastructure via the HMC.
@@ -27,7 +27,7 @@ Select **Infrastructure** on the left size of the Instana UI.
 
 In the Infrastructure view, you will notice that there are several key Power resources.  You'll see a Zone named **IBM i** that contains an IBM i LPAR that is running DB2.  You will also see a zone named **pLinux** that contains a Linux LPAR running on Power.  You should also see the nodes that makeup your OCP Cluster and your AIX LPAR with the Zone names that you specified during the installation.
 
-Explore the Host Agents on IBM i, AIX, and Linux on Power by selecting the Node and then selecting the **Open Dashboard** button.
+Explore the Host Agents on IBM i, AIX, and Linux on Power by selecting the Node and then selecting the **Open Dashboard** button.  The **IBM i** server is in a zone named **IBM i** as seen below.  The **Linux on Power** LPAR is located in the **pLinux** zone.
   ![](images/IBMi.png)
 
 You will notice that AIX and Linux on Power are nearly identical to Linux on x86.  The configuration details on the left side are slightly different, but most Host metrics are the same.  When you look at the IBM i Host Agent, you'll notice quite a few differences.  This Host Agent is more extensive and includes information such as running **jobs**, **auxiliary storage pools**, **spinning disks**, **queues** and more.
