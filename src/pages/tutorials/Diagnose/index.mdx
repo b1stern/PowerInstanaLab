@@ -92,7 +92,6 @@ is being used for this application transaction.
 
 Click on the link to navigate to the queue details.
 
-
 ![](images/queueDetails.png)
 
 
@@ -102,6 +101,9 @@ On this screen, you'll notice a few important things.
 - The **Messages In** rate is zero during the timeframe that the queue is full.
 
 Clearly there is a problem with this queue.  The queue is full and transactions won't work properly because new messages can't be placed on the queue.  We need to resolve the queue depth problem in order to fix the application.
+
+From here, if you wanted to investigate further, you could use the **bread crumbs** at the top of the screen or the **Stack** to navigate to the related resources.  For example, examine the Host metrics or the OpenShift infrastructure.
+![](images/stack.png)
 
 
 That completes this section of the lab.
