@@ -29,11 +29,9 @@ You will see the details related to raw **Events** that were correlated via **an
 ![](images/incident.png)
 
 
-In this case, you should see the **Triggering Event** and a few **Related Events**.   The **Triggering Event** is the first event that starts to impact a service or a website.
+In this case, you should see the **Triggering Event** and a few **Related Events**.   The **Triggering Event** is the first event that starts to impact a service or a website.  The **Related Events** are events that Instana determined are related by leveraging analytics including the relationships that exist between the various entities, services, and endpoints.
 
 Within the Incident, you can see when the Incident opened and in some cases, when it closed.  And, you can see the **Incident Timeline**.  This is the time when each event opened and closed.   If the event is still open, it will be color coded with the event severity.
-
-You will see the **"Triggering Event"** and any **"Related Events"**.
 
 On the right side, click on the **"+"** symbol to expand the Triggering Event.
 ![](images/singleIncident.png)
@@ -70,6 +68,8 @@ When you see errors, normally you go to the bottom of the call stack.  That's be
 Click on the last call and examine the information on the right side.  Do this by clicking on the text **PUT CP4I.DEMO**
 ![](images/MQcall.png)
 
+In your spare time, you can click on other types of transactions in the Call Stack, but for now, let's focus on the diagnostic scenario.
+
 When you select the MQ call, the right side of the screen gets updated with context for that call.  You will see the following error message:  **"IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2053' ('MQRC_Q_FULL')"**
 ![](images/error2053.png)
 
@@ -85,7 +85,7 @@ In this case, you may want to examine the queue that is causing this error. Or, 
 
 Instana automatically puts a link to the queue in the lower right corner.  For other technologies, there are similar links.
 
-Now, scroll all the way to the bottom on the right side of the screen.  You'll see that there is a link that will link to the MQ Queue named CP4I.DEMO.API.Q.  This is the queue that
+Scroll all the way to the bottom on the right side of the screen.  You'll see that there is a link that will link to the MQ Queue named **CP4I.DEMO.API.Q**.  This is the queue that
 is being used for this application transaction.
 ![](images/queueLink.png)
 
