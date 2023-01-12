@@ -7,8 +7,9 @@ description: Install and configure monitoring for the AIX LPAR and OCP Cluster
   <AnchorLink>1-1: Login to the AIX LPAR</AnchorLink>
   <AnchorLink>1-2: Preparing to Install the Instana Agent</AnchorLink>
   <AnchorLink>1-3: Install the Instana Agent on AIX</AnchorLink>
-  <AnchorLink>1-4: Install the Instana Agent to Monitor OpenShift</AnchorLink>
-  <AnchorLink>1-5: Summary</AnchorLink>
+  <AnchorLink>1-4: Configuring the Instana Agent</AnchorLink> 
+  <AnchorLink>1-5: Install the Instana Agent to Monitor OpenShift</AnchorLink>
+  <AnchorLink>1-6: Summary</AnchorLink>
 </AnchorLinks>
 
 ## 1-1: Login to the AIX LPAR
@@ -27,7 +28,7 @@ sudo -i
 ## 1-2:  Preparing to Install the Instana Agent
 On some platforms, the Instana Host Agent comes pre-packaged with a Java SDK.  But, on AIX java is not include in the installation package.  Instana supports multiple vendor SDKs, but does require java 8 or 11.  On some servers, you will need to install a Java SDK before installing the **Host Agent** on AIX.
 
-In your lab AIX LPAR, a Java SDK already exists.   But you do need to setup some environment variables to ensure that the Agent uses the the SDK.  The **PATH** is already setup correctly, but it is necessary to set the **JAVA_HOME** environment variable.  There are two ways to do this.  You can setup JAVA_HOME as an environment variable. Or, you can add the environment variable to the Instana **setenv** file located in Instana's **bin** directory.  For this lab, we will set the environment variable for the root user account.
+In your lab AIX LPAR, a Java SDK already exists.   But you do need to setup an environment variable to ensure that the Agent uses the the SDK.  The **PATH** is already setup correctly, but it is necessary to set the **JAVA_HOME** environment variable.  There are two ways to do this.  You can setup JAVA_HOME as an environment variable. Or, you can add the environment variable to the Instana **setenv** file located in Instana's **bin** directory.  For this lab, we will set the environment variable for the root user account.
 
 As the root user, type "cd" to change to root's home directory.
 ```sh
@@ -84,14 +85,16 @@ Next select the dropdown list in the middle of the page.  Select "**AIX (64bit -
 
 You'll notice that there are multiple options for AIX.  In this environment, we are using a 64-bit version of AIX.  In addition, there is an option for a "**static**" Agent.  Static Agents are used when you are in an air-gapped environment or when there are strict change control processes.  The **dynamic** agents are recommended for most environments.  The sensors for the discovered technologies will automatically download as needed and the Agent and sensors will automatically update themselves as new fixes and enhancements become available.  This lowers your total cost of ownership.
 
-The reason that you downloaded the Host Agent from the Instana user interface is that the media has specifically been configured so that the Agent will communicate and send data to your Instana server.  This includes the path to the Instana server as well as the Agent Key necessary to communicate with your backend server.
+The reason that you downloaded the Host Agent from the Instana user interface is that the media has specifically been configured so that the Agent will communicate and send data to **your** Instana server.  This includes the path to the Instana server as well as the Agent Key necessary to communicate with your backend server.
 
 Now that you have download the Agent tar file, you must copy it to the AIX LPAR.   Use **scp** to copy the image to the LPAR.
 
 ```sh
 scp instana-agent-aix-ppc-64bit.tar.gz root@<IP address of AIX LPAR>:/opt
 ```
-Replace \<IP address of AIX LPAR\> with the IP address of the AIX LPAR.
+Replace <IP address of AIX LPAR\> with the IP address of the AIX LPAR.
+
+When prompted, enter the root password.
 
 Now, switch back to the AIX terminal window.
  
@@ -117,9 +120,13 @@ Run the start command by typing:
 ./start
 ```
 
-This will start the Instana Agent.
+This will start the Instana Agent.   The Agent will begin monitoring the AIX operating system and will start discovering middleware and key processes that are running on the server.
 
-In addition, there are some optional configuration steps.  We'll examine and change some of the optional configuration parameters.
+***
+
+## 1-4:  Configuring the Instana Agent
+
+Now that the Agent is installed, there are some optional configuration steps.  We'll examine and change some of the optional configuration parameters.
 
 Change directory to /opt/instana-agent/etc/instana
 ```sh
@@ -171,7 +178,9 @@ com.instana.plugin.process:
 
 By monitoring the **cron** process, we can see its performance utilization and can also monitor to ensure that the process is running.
 
-Finally, scroll down to the section titled **"MariaDB"**.  Since this server is running MariaDB, let's configure that sensor.  Uncomment the section and specify the MariaDB credentials as follows. Replace \<mariadb username\> and \<mariadb passwd\> with the username and password for your environment.  The MariaDB username and password are provided in the Box Note containing the credentials for the environment. 
+Finally, scroll down to the section titled **"MariaDB"**.  Since this server is running MariaDB, let's configure that sensor.  Uncomment the section and specify the MariaDB credentials as follows. Replace <mariadb username\> and <mariadb passwd\> with the username and password for your environment.  
+
+The MariaDB username and password are provided in the Box Note containing the credentials for the environment. 
 
 ```sh
 # MariaDB
@@ -199,13 +208,13 @@ Open the Instana UI and select the Infrastructure view
 
 You should see your AIX Host Agent show up within the zone name that you specified.   Sometimes it take a few minutes before the Agent moves from the **undefined** zone to the zone name that you specified.
 
+We'll drill into the AIX Host details in the **Explore** portion of the lab.  For now, proceed to section 1-5.
+
 
 ***
 
-## 1-4:  Install the Instana Agent to Monitor OpenShift
+## 1-5:  Install the Instana Agent to Monitor OpenShift
 In this lab, we will be installing the Instana Agent into an OpenShift on Power cluster.  You will be using the same cluster that you used in previous labs during the Tech Academy.
-
-**Leave the Terminal window open**, but select the browser and navigate to the tab containing the Instana user interface.   
 
 Select the "Stan" the robot icon in the upper left corner
   ![](images/stan.png)
@@ -223,14 +232,20 @@ Select the dropdown list next to the word **"Technology"**.  Notice that there a
 Enter a name for the Cluster and Zone as seen below.  Use **your name** for the **"Cluster name"** and **your name** for the **"Zone name"**.  This will allow you to find your Agent and Kubernetes Cluster within the user interface and not get confused by data coming in from other students.
   ![](images/ZoneCluster.png) 
 
-Next, click the "Download" button to download the yaml file.  The yaml file has been configured specifically to connect to your Instana SaaS environment and will contain the **Cluster** name 
+Next, click the **"Download"** button to download the yaml file.  The yaml file has been configured specifically to connect to your Instana SaaS environment and will contain the **Cluster** name 
 and **Zone** name that you previously specified.
   ![](images/Download.png) 
 
+You will be using the **oc** command to install the Instana Agent.  If you have the **oc** command on your laptop, you can issue the command directly on your laptop.  Just make sure that you are logged into the OpenShift cluster.
 
-If you downloaded the yaml file to your laptop, you must login to the OCP cluster before installing the Agent.  Once you are logged into the OCP Cluster, you can install the Agent using the **oc** command as shown below.
+If you don't have the oc command on your laptop, you can scp the configuration.yaml file to the bastion node on the OCP cluster and issue the **oc** command from the bastion node.  To scp the configuration.yaml file to the Bastion node, issue this command:
 
-If you don't have the oc command on your laptop, you can scp the configuration.yaml file to the bastion node on the OCP cluster and issue the **oc** command from the bastion node.
+```sh
+scp configuration.yaml root@<IP address of Bastion Node>:/root
+```
+Replace <IP address of Bastion Node\> with the IP address of the Bastion Node.
+
+When prompted, enter the root password.
 
 Using a terminal window, use the **oc** command to login to the cluster.  If you aren't sure how to login, you can copy the command by going to the OpenShift browser interface and select the login name in the upper right corner and then select **copy login command**
   ![](images/ocpLogin.png)
@@ -275,32 +290,9 @@ If the pod is not running, wait a minute and issue the "oc get pods" command aga
 
 ***
 
-## 1-5: Summary
-***
-In this portion of the lab, you are going to install the Quote of the Day application.  During the installation, Node.js monitoring instrumentation will be enabled.  Note that for many technologies like java, monitoring instrumentation is automatic. But some technologies require some additional steps.  
-
-In the **Instana & Turbonomic Docs** Box folder, you'll a yaml file named qotd.yaml.  Download this file and copy it to a system that has access to the **oc** command with access to the PowerVM OCP Cluster.
-
-In the examples below, the qotd.yaml file will be placed in the /tmp directory.
-
-Using a terminal window, use the **oc** command to login to the cluster.  If you aren't sure how to login, you can copy the command by going to the OpenShift browser interface and select the login name in the upper right corner and then select **copy login command**
-  ![](images/ocpLogin.png)
-
-First, create the required **projects(namespaces)**.   The application requires both **qotd** and **qotd-load** projects.  Issue the following commands:
-```sh
-oc create namespace qotd-app
-oc create namespace qotd-app-load
-```
-
-Next, run the following command to install the application. If the qotd.yaml file is in a different directory, replace /tmp with the proper path.
-```sh
-oc apply -f /tmp/qotd.yaml
-```
-
-
 ## 1-6: Summary
 
-In this portion of the lab, you learned out to install the Instana Agent to monitor **AIX** and **kubernetes/OpenShift**.  You also learned some of the configuration options to customize the Agent and setup sensors that require customization.  Finally, you installed the **Quote of the Day** application.
+In this portion of the lab, you learned out to install the Instana Agent to monitor **AIX** and **kubernetes/OpenShift**.  You also learned some of the configuration options to customize the Agent and setup sensors that require customization.  
 
 You should now have an AIX Agent that is installed and monitoring MariaDB and you should have an OpenShift cluster being monitored.
 
