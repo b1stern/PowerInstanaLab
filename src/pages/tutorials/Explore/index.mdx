@@ -9,6 +9,7 @@ description:
   <AnchorLink>2-2: Explore kubernetes</AnchorLink>
   <AnchorLink>2-3: Exploring the Quote of the Day Application</AnchorLink>
   <AnchorLink>2-4: Unbounded Analytics</AnchorLink>
+  <AnchorLink>2-5: Logs</AnchorLink> 
   <AnchorLink>2-5: Summary</AnchorLink>
 </AnchorLinks>
 
@@ -189,8 +190,71 @@ And, you can select an individual call and Analyze the transaction in the contex
 ***
 
 ## 2-5: Summary
+In this portion of the lab, we'll be examining Instana's capabilities around **Log** monitoring.
 
-In this exercise you have explored some of the key capabilities within Instana.  You explored PowerVM monitoring. You explored kubernetes monitoring. You explored the application monitoring details.  And, you explored how you can use unbounded analytics to glean insights.
+Instana captures log data in a couple of ways.  It captures logs from application servers/runtimes in the context of application traces that are being captured by the app server/runtime sensors.  In addition, Instana can capture the container logs in a kubernetes/OpenShift cluster.
+
+Log data can be seen in a number of places.  You'll see log data in context with application traces.  You'll see log data in context with kubernetes environments, and you'll see log data via **unbounded analytics**
+
+Let's begin by looking at logs via **unbounded analytics**.   On the left side, select **analytics**
+  ![](images/logs.png) 
+
+At the top of the screen, select the dropdown list and select **Logs**
+  ![](images/logs2.png) 
+
+The default view will show you all log entries collected within the environment.  Just like any unbounded analytics page, you can easily **filter** or **group** the log entries.  Let's try a couple of examples.
+
+First, select the **filter** button and select **Logs Level** and then select or type **ERROR** to filter the results to only the **ERROR** log messages.
+  ![](images/filterLogs.png)
+
+Next, group the log entries by the unique log messages.   Do this by selecting **Add group** and then selecting **Logs Message**.  This will create groups of unique log messages as seen below.  You can expand one of the groups by selecing the down arrow.
+  ![](images/groupLogs.png)
+
+Expand the down error for the group of low entries with message **""responseText": "Problem requesting engraving. Internal Server Error","** . If you can't fine that entry, select another group to expand.
+  ![](images/logEntry.png)
+
+Next, select one of the log entrys and expand the **down arrow**
+  ![](images/logEntry2.png)
+
+You'll see a lot of additional contextual information related to the log entry.  We don't simply show you the log message.  We show you details of where the log entry came from.  Depending on the log entry origin, this can include information like:
+- Log Level (Severity)
+- Kubernetes Cluster, Node, Namespace, deployment, and pod
+- Host where the log originated
+- Kubernetes container
+- CPU and Memory utilization of the container
+- Application(s) that are used by this component
+- Process name
+- Endpoint (URL)
+- Trace ID
+This additional context provides a wealth of information that is useful in diagnosing a problem.  Try clicking on a few different log entries.  You'll notice that the additional contextual details are slightly different.
+
+In addition, you can navigate to additional details by selecting any of the **blue** links.
+  ![](images/logDetails.png)
+
+Next, let's see **Log** data in context with **kubernetes**
+
+On the left navigation, select **Platform** and then **Kubernetes**
+  ![](images/kubernetes2.png)
+
+Select the **demo-us-cluster**
+
+As you scroll down the page, you'll see a historical graph showing the log entries for the cluster.  There is also an option to **Analyze** the logs
+  ![](images/clusterLogs.png)
+
+Next select **Nodes** and then select one of the nodes.
+  ![](images/node.png)
+
+Scroll down and you can see the log entries for the **Node**.  The same **Analyze** icon is available if you want to drill into the individual log entries.
+  ![](images/nodeLogs.png)
+
+Similarly, you can view the log entries for Namespaces, Daemonsets, pods, services, and more.  Simply drill into that category of Kubernetes data and you'll see the historical graph showing the log entries.
+
+
+***
+
+## 2-5: Summary
+
+In this exercise you have explored some of the key capabilities within Instana.  You explored PowerVM monitoring. You explored kubernetes monitoring. You explored the application monitoring details.  And, you explored how you can use unbounded analytics to glean insights.  Finally, you explored Log monitoring within Instana.
 
 
 To continue other portions of the lab, select one of the lab exercises in the upper left corner or select one of the images below.

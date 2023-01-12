@@ -8,7 +8,8 @@ description: Perform Administrative Functions with Instana
   <AnchorLink>4-2: Create a Static Threshold (Event)</AnchorLink>
   <AnchorLink>4-3: Setup an Alert for the New Event</AnchorLink>
   <AnchorLink>4-4: Using Instana REST APIs</AnchorLink>
-  <AnchorLink>4-4: Summary</AnchorLink>
+  <AnchorLink>4-5: Defining an Application Perspective</AnchorLink>
+  <AnchorLink>4-6: Summary</AnchorLink>
 </AnchorLinks>
 
 # 4-1:  Create an Analytics Based Smart Alert
@@ -301,14 +302,38 @@ The result will look something like this:
 
 You'll see one stanza for each application perspective.
 
+***
+
+# 4-5:  Defining an Application Perspective
+In this section, we're not going to create an **Application Perspective**, but we are going to examine how you might define one.   The process for creating an **Application Perspective** is very simple.  What's important is identifying the components that make up the application.
+
+Select **Applications** on the left side navigation.
+![](images/applications2.png)
+
+Next, select the **Quote of the Day** application.
+
+Within the **Quote of the Day** application, select the **Configuration** tab.
+![](images/configuration.png)
+
+You'll see the details of what defines the **Application Perspective**
+![](images/applicationDefinition.png)
+
+Section 2 is the most important section. This is where you specify the components that should be included for this application.  It is a combination of **AND** and **OR** statements as well as **brackets ()**.  In this example, we specify the **qotd** namespace where this application is running.  For a kubernetes based application, this is the easist way to define an application.  Simply specify the namespace(s) where it is running. In addition, this application has some services that are running outside of kubernetes.  We typically either specify the **service names** or we specify the **endpoint names** that make up the application.  In this example, we specified the **service names**. 
+
+You'll notice that in some cases we provided the exact name of the service (**vader-acemq.coc-ibm.com-BK1:EG2**) which is our IBM ACE server.  In other cases, we used **contains** to find substrings like **QM1** which is our IBM MQ Queue Manager name.
+
+Finally, the last parameter filters **out** any **endpoint (URL)** that is **GET /health**.   **Get /health** represents that kubernetes health checks.  These aren't part of the business application transactions and should not be included.
+
+Sections 3 and 4 provide other options.  Sometimes you don't want to monitor downstream services or only want to monitor immediate downstream services.  Sometimes you only want to monitor inbound calls.  You get to choose and the resulting monitored transactions will be slightly different.   
+-
 
 ***
 
-# 4-5:  Summary
+# 4-6:  Summary
 
 At this point, you have created an Event and an Alert for that Event.  The next time the custom **"Event"** that you created triggers, an **"Alert"** will be sent to the **"IT Operations"** Alert Channel.  In this case, an Email will be sent to the IT Operations team. 
 
-In this section of the lab, you learned how to create a Smart Alert, a traditional Alert (Event), and learned this Alerts are routed to the correct people/teams via Alert Channels.   You have also learned how to use some of the simpler Instana REST APIs.
+In this section of the lab, you learned how to create a **Smart Alert**, a **traditional Alert (Event)**, and learned this **Alerts** are routed to the correct people/teams via **Alert Channels**.   You have also learned how to use some of the simpler Instana **REST APIs**.  Finally, you learned out **Application Perspectives** are defined within Instana.
 
 
 If you haven't completed all of the sections, you can continue other portions of the lab. Select one of the lab exercises in the upper left corner or select one of the images below.
