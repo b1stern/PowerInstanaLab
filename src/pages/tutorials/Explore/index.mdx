@@ -10,7 +10,7 @@ description:
   <AnchorLink>2-3: Exploring the Quote of the Day Application</AnchorLink>
   <AnchorLink>2-4: Unbounded Analytics</AnchorLink>
   <AnchorLink>2-5: Logs</AnchorLink> 
-  <AnchorLink>2-5: Summary</AnchorLink>
+  <AnchorLink>2-6: Summary</AnchorLink>
 </AnchorLinks>
 
 ***
@@ -18,7 +18,7 @@ description:
 In this portion of the lab, you will explore some key Instana capabilities including monitoring of PowerVM, kubernetes, monitoring of applications, and monitoring of infrastructure.
 
 If you haven't already done so, login to the Instana user interface via a browser.  Use the following URL:  https://instana-labs.instana.io/
-Login as apmdemo-2@yahoo.com and the password provided by your instructor.
+Login as apmdemo-2@yahoo.com and the password provided by your instructor and located in the **Box Note**.
 
 ## 2-1: Explore PowerVM Monitoring
 In this section of the lab, we'll explore how Instana can be used to monitor the PowerVM infrastructure.  This includes monitoring AIX LPARs, Linux LPARs, IBM i LPARs and the Power infrastructure via the HMC.
@@ -28,10 +28,10 @@ Select **Infrastructure** on the left size of the Instana UI.
 
 In the Infrastructure view, you will notice that there are several key Power resources.  You'll see a Zone named **IBM i** that contains an IBM i LPAR that is running DB2.  You will also see a zone named **pLinux** that contains a Linux LPAR running on Power.  You should also see the nodes that makeup your OCP Cluster and your AIX LPAR with the Zone names that you specified during the installation.
 
-Explore the Host Agents on IBM i, AIX, and Linux on Power by selecting the Node and then selecting the **Open Dashboard** button.  The **IBM i** server is in a zone named **IBM i** as seen below.  The **Linux on Power** LPAR is located in the **pLinux** zone.
+Explore the Host Agents on IBM i, AIX, and Linux on Power by selecting the Node and then selecting the **Open Dashboard** button.  When you select the Node, be careful to select the top corner to ensure that you are selecting Host Agent rather than one of the other sensors.  When you select the Node, a dialog will appear in the left side of the screen and you can select **Open Dashboard**.
   ![](images/IBMi.png)
 
-You will notice that AIX and Linux on Power are nearly identical to Linux on x86.  The configuration details on the left side are slightly different, but most Host metrics are the same.  When you look at the IBM i Host Agent, you'll notice quite a few differences.  This Host Agent is more extensive and includes information such as running **jobs**, **auxiliary storage pools**, **spinning disks**, **queues** and more.
+You will notice that **AIX** and **Linux on Power** are nearly identical to **Linux on x86**.  The configuration details on the left side are slightly different, but most Host metrics are the same.  When you look at the **IBM i Host Agent**, you'll notice quite a few differences.  This Host Agent is more extensive and includes information such as running **jobs**, **auxiliary storage pools**, **spinning disks**, **queues** and more.
 
 Next, explore the monitoring data being gathered via the HMC sensor.  On the left size of the navigation, select **Platform** and then select **IBM Power**
   ![](images/HMC.png)
@@ -61,10 +61,8 @@ The **Virtual I/O Server** is one of the most important things to examine.  If t
 
 ## 2-2: Explore OpenShift on Power
 
-In this section of the lab, we'll focus on monitoring of the OpenShift infrastructure when the OCP is running on Power.  What's important to understand is that there are no Power specific.  The only thing you will notice that is different between x86, Power, and Z is on the Details tab of the Nodes.  On that screen, you can see the platform details.
+In this section of the lab, we'll focus on monitoring of the OpenShift infrastructure when the OCP is running on Power.  What's important to understand is that there are no Power specific metrics.  The only thing you will notice that is different between x86, Power, and Z is on the Details tab of the Nodes.  On that screen, you can see the platform details.
   ![](images/kube.png)
-
-Open the browser for the Instana user interface.
 
 On the left navigation, select **Platforms** and then **Kubernetes**
   ![](images/kubernetes2.png)
@@ -87,18 +85,15 @@ oc logs POD_NAME -c instana-agent -n instana-agent
 ```
 where **POD_NAME** is one of the pods listed in the previous command.
 
-Assuming that your cluster name shows up properly, click on the link for your student name.
+Assuming that your cluster name shows up properly, click on the link for your student name.  If your cluster doesn't show up, just select a different student's cluster.
 
 You should see a screen similar to the one below where you can see overall utilization of the kubernetes cluster.
   ![](images/cluster.png)
 
 Select some of the other tabs to explore the kubernetes monitoring.  We recommend you look at the Events, Nodes, and Pods tabs.  When you select the pods tab, you will see a list of all pods running within the cluster.
 
-In the upper right corner, add your name into the search widget.  You'll notice that it will filter the list to the pods related to the Quote of the Day application.
-  ![](images/pods.png)
-
 Click on one of the links on the left side and drill into the pod utilization details.
-
+  ![](images/pods.png)
 
 ***
 
@@ -164,7 +159,7 @@ At the top of the screen, you'll see that there is a dropdown called **Applicati
 
 By default, you will see a list of **all** application calls.   **Unbounded analytics** provides and opportunity to answer some questions that you might have able the application calls.   Let's look at a scenario that a DBA might be interested in.   A DBA might want to see which SQL queries are taking the longest to run.  This is easy to achieve with **unbounded analytics**.
 
-First, we need to filter the queries to just the database calls.  For this exercise, we'll select all database calls, but we could easily filter further to specific types of databases or specific applications.  On the left side of the screen, select **Type** and then select the **Database** checkbox.  This will filter the calls to just the **Database** calls.
+First, we need to filter the queries to just the database calls.  For this exercise, we'll select all database calls, but we could easily filter further to specific types of databases or specific applications.  On the left side of the screen, select **Types** and then select the **Database** checkbox.  This will filter the calls to just the **Database** calls.
   ![](images/database.png) 
 
 Next, click on the **Add group** button near the top of the page.
@@ -189,7 +184,7 @@ And, you can select an individual call and Analyze the transaction in the contex
 
 ***
 
-## 2-5: Summary
+## 2-5: Logs
 In this portion of the lab, we'll be examining Instana's capabilities around **Log** monitoring.
 
 Instana captures log data in a couple of ways.  It captures logs from application servers/runtimes in the context of application traces that are being captured by the app server/runtime sensors.  In addition, Instana can capture the container logs in a kubernetes/OpenShift cluster.
@@ -252,7 +247,7 @@ Similarly, you can view the log entries for Namespaces, Daemonsets, pods, servic
 
 ***
 
-## 2-5: Summary
+## 2-6: Summary
 
 In this exercise you have explored some of the key capabilities within Instana.  You explored PowerVM monitoring. You explored kubernetes monitoring. You explored the application monitoring details.  And, you explored how you can use unbounded analytics to glean insights.  Finally, you explored Log monitoring within Instana.
 
