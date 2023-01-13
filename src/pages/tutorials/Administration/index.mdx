@@ -62,7 +62,7 @@ Scroll down further and you'll see an option to **add filter**.   This would all
 
 Below that, you'll see an option to specify a percentile for latency.   Specify a percentile of **95%**.   
 
-Below the percentile, you'll see that there is a slider that allows you to adjust the **sentitivity**.  In order to see the effects of the **percentile** and **sensitivity**, you must first select a specific service where you can preview the results of your settings.  
+Below the percentile, you'll see that there is a slider that allows you to adjust the **sensitivity**.  In order to see the effects of the **percentile** and **sensitivity**, you must first select a specific service where you can preview the results of your settings.  
 
 In the **Preview for Service** dropdown, select the **qotd-rating** service.  Then, adjust the sensitivity slider.
 ![](images/smartAlert3.png)
@@ -125,6 +125,8 @@ Select **"Events"**
 Once you click on **"Events"**, you will see a list of 300+ Events that are defined as out of the box thresholds within Instana.  If you want to filter the list, you can do that in a number of ways
 via the drop down lists at the top of the page.
 ![](images/filterEvents.png)
+
+One thing you might notice is a **warning** at the top of the screen.  This indicates that traditional static alerts for application traces and services are being deprecated.  They have been replaced by **Smart Alerts**.  You'll examine Smart Alerts in the next section. Traditional **Events** are still used for infrastructure performance KPIs.
 
 Notice that you can filter based on the Event type, severity, entity type, state, or simply enter a keyword filter.
 

@@ -250,12 +250,12 @@ and **Zone** name that you previously specified.
 
 You will be using the **oc** command to install the Instana Agent.  If you have the **oc** command on your laptop, you can issue the command directly on your laptop.  Just make sure that you are logged into the OpenShift cluster.
 
-If you don't have the oc command on your laptop, you can scp the configuration.yaml file to the bastion node on the OCP cluster and issue the **oc** command from the bastion node.  To scp the configuration.yaml file to the Bastion node, issue this command:
+If you don't have the oc command on your laptop, you can scp the configuration.yaml file to the Linux VM provided for the lab and issue the **oc** command from the Linux VM.  To scp the configuration.yaml file to the Linux VM, issue this command:
 
 ```sh
-scp configuration.yaml root@<IP address of Bastion Node>:/root
+scp configuration.yaml root@<IP address of Linux VM>:/root
 ```
-Replace <IP address of Bastion Node\> with the IP address of the Bastion Node.
+Replace <IP address of Linux VM\> with the IP address of the Linux VM.
 
 When prompted, enter the root password.
 
