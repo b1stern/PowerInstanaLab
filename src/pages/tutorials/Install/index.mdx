@@ -103,9 +103,10 @@ cd to the /opt directory.
 cd /opt
 ```
 
-Now, extract the tar file by typing:
+Now, extract the tar file by issuing the following two commands:
 ```sh
-tar -xf ./instana-agent-aix-ppc-64bit.tar.gz
+gunzip ./instana-agent-aix-ppc-64bit.tar.gz
+tar -xf ./instana-agent-aix-ppc-64bit.tar
 ```
 
 Now, you must start the Agent.  In a production environment, you would also want to setup the /etc/rc.d autostart files, but we are going to skip that step for the lab. 
