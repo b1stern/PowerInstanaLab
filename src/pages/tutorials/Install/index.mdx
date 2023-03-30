@@ -226,43 +226,38 @@ We'll drill into the AIX Host details in the **Explore** portion of the lab.  Fo
 ***
 
 ## 1-5:  Install the Instana Agent to Monitor OpenShift
-In this lab, we will be installing the Instana Agent into an OpenShift on Power cluster.  You will be using the same cluster that you used in previous labs during the Tech Academy.
+<span style="color:red"> *In this section of the lab, we are just going to describe the steps necessary to instrument an OpenShift cluster.  You will need be executing these steps since you don't have your own cluster.
+  
+We recommend that you execute steps 1 through 5 and then skip the remaining steps because they require access to an OpenShift Cluster where you have Cluster Admin permissions.*</span>
 
-Select the "Stan" the robot icon in the upper left corner
+1. Select the "Stan" the robot icon in the upper left corner
   ![](images/stan.png)
 
-Next, click the **"Deploy Agent"** button near the upper right corner.
+2. Next, click the **"Deploy Agent"** button near the upper right corner.
   ![](images/DeployAgent.png)
 
 A window will open with a list of different environments where you can install the Instana Agent.  In this lab, we are installing into OpenShift, so select OpenShift from the list.
   ![](images/OpenShift.png)
 
-Select the dropdown list next to the word **"Technology"**.  Notice that there are multiple options for installing the Agent.  Choose the **"YAML"** option from the list.
+3. Select the dropdown list next to the word **"Technology"**.  Notice that there are multiple options for installing the Agent.  Choose the **"YAML"** option from the list.
   ![](images/yaml.png) 
 
 
-Enter a name for the Cluster and Zone as seen below.  Use **your name** for the **"Cluster name"** and **your name** for the **"Zone name"**.  This will allow you to find your Agent and Kubernetes Cluster within the user interface and not get confused by data coming in from other students.
+4. Enter a name for the Cluster and Zone as seen below.  Use **your name** for the **"Cluster name"** and **your name** for the **"Zone name"**.  This will allow you to find your Agent and Kubernetes Cluster within the user interface and not get confused by data coming in from other students.
   ![](images/ZoneCluster.png) 
 
-Next, click the **"Download"** button to download the yaml file.  The yaml file has been configured specifically to connect to your Instana SaaS environment and will contain the **Cluster** name 
+5. Next, click the **"Download"** button to download the yaml file.  The yaml file has been configured specifically to connect to your Instana SaaS environment and will contain the **Cluster** name 
 and **Zone** name that you previously specified.
   ![](images/Download.png) 
 
-You will be using the **oc** command to install the Instana Agent.  If you have the **oc** command on your laptop, you can issue the command directly on your laptop.  Just make sure that you are logged into the OpenShift cluster.
+6. You will be using the **oc** command to install the Instana Agent.  If you have the **oc** command on your laptop, you can issue the command directly on your laptop.  Just make sure that you are logged into the OpenShift cluster.
 
 If you don't have the oc command on your laptop, you can scp the configuration.yaml file to the Linux VM provided for the lab and issue the **oc** command from the Linux VM.  To scp the configuration.yaml file to the Linux VM, issue this command:
 
-```sh
-scp configuration.yaml root@<IP address of Linux VM>:/root
-```
-Replace <IP address of Linux VM\> with the IP address of the Linux VM.
-
-When prompted, enter the root password.
-
-Using a terminal window, use the **oc** command to login to the cluster.  If you aren't sure how to login, you can copy the command by going to the OpenShift browser interface and select the login name in the upper right corner and then select **copy login command**
+7. Using a terminal window, use the **oc** command to login to the cluster.  If you aren't sure how to login, you can copy the command by going to the OpenShift browser interface and select the login name in the upper right corner and then select **copy login command**
   ![](images/ocpLogin.png)
 
-Issue the following command in the directory that contains the configuration.yaml file:
+8. Issue the following command in the directory that contains the configuration.yaml file:
 ```sh
 oc create -f ./configuration.yaml
 ```
@@ -274,14 +269,14 @@ This command will create an instana-agent project/namespace and install the Inst
 The installation process is nearly identical for other versions of kubernetes.
 
 
- Next, you need to setup the proper permissions for the service account.  This will allow the Agent to have access to monitor the entire cluster.
+ 9. Next, you need to setup the proper permissions for the service account.  This will allow the Agent to have access to monitor the entire cluster.
 
- First, change to the instana-agent OpenShift project by typing:
+ 10. First, change to the instana-agent OpenShift project by typing:
  ```sh
  oc project instana-agent
  ```
 
- Type the following command to setup the proper permissions.  Instana is attempting to monitor the entire cluster and needs access to all projects/namespaces.   
+ 11. Type the following command to setup the proper permissions.  Instana is attempting to monitor the entire cluster and needs access to all projects/namespaces.   
  ```sh
  oc adm policy add-scc-to-user privileged -z instana-agent
  ```
@@ -289,7 +284,7 @@ The installation process is nearly identical for other versions of kubernetes.
  You should see output similar to the screen capture below.
   ![](images/permissions.png)
 
-Next, type:  
+12. Next, type:  
 ```sh
 oc get pods
 ```
@@ -297,7 +292,7 @@ oc get pods
 This will provide a list of the pods that are in this namespace (project).  Notice that the instana-agent pod is running.
   ![](images/pods.png)
 
-If the pod is not running, wait a minute and issue the "oc get pods" command again.
+This completes the installation of the Instana Agent into an OpenShift cluster.
 
 
 ***
