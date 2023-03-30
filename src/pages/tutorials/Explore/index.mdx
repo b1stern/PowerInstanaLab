@@ -73,24 +73,9 @@ On the left navigation, select **Platforms** and then **Kubernetes**
   ![](images/kubernetes2.png)
 
 You will see a list of kubernetes clusters.   Look for the Cluster with your name.  If you don't see your name, you may need to wait a couple of minutes.
-  ![](images/clusters.png)
+  ![](images/power-k8s.png)
 
-If you don't see your student name after a couple of minutes, we need to troubleshoot the Instana Agent.  From a terminal window, issue the following command:
-```sh
-oc get pods -n instana-agent
-```
-
-Check to make sure that all pods are running.
-
-If all pods are running, we need examine the logs of one of the pods.
-
-Type:  
-```sh
-oc logs POD_NAME -c instana-agent -n instana-agent
-```
-where **POD_NAME** is one of the pods listed in the previous command.
-
-Assuming that your cluster name shows up properly, click on the link for your student name.  If your cluster doesn't show up, just select a different student's cluster.
+Click on the link labeled **power-k8s (cluster)**
 
 You should see a screen similar to the one below where you can see overall utilization of the kubernetes cluster.
   ![](images/cluster.png)
