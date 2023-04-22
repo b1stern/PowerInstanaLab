@@ -109,6 +109,28 @@ gunzip ./instana-agent-aix-ppc-64bit.tar.gz
 tar -xf ./instana-agent-aix-ppc-64bit.tar
 ```
 
+Next, you will need to edit the "Backend.cfg" file in order to tell the Agent how to communicate with the Instana server.  For large scale customer deployments, you can update the tar file so that these steps won't be necessary.
+
+Change directory to the /opt/instana-agent/etc/instana directory
+```sh
+cd /opt/instana-agent/etc/instana
+```
+
+Use "vi" to edit the file com.instana.agent.main.sender.Backend.cfg.
+```sh
+vi com.instana.agent.main.sender.Backend.cfg
+```
+
+Within the file, edit and set the following parameters.  Not that they "key" parameter must be obtained from your instructor or can be looked up by going to "Deploy Agent" and looking at the OpenShift Agent.  Notice that you can see the other parameters on the screen as well.
+  ![](images/agentKey.png)
+
+```sh
+host=ingress-coral-saas.instana.io
+port=443
+protocol=HTTP/2
+key=<provided by your instructor or obtained from the Agent Download screen>
+```
+
 Now, you must start the Agent.  In a production environment, you would also want to setup the /etc/rc.d autostart files, but we are going to skip that step for the lab. 
 
 Now, let's start the Instana Agent.  Change directory to the **/opt/instana-agent/bin** directory
@@ -229,6 +251,7 @@ We'll drill into the AIX Host details in the **Explore** portion of the lab.  Fo
 <span style="color:red"> **In this section of the lab, we are just going to describe the steps necessary to instrument an OpenShift cluster.  You won't be executing these steps since you don't have your own cluster.**</span>
 
 
+Please just read the steps below.  Do NOT execute these steps.
 
 <span style="color:red"> **We recommend that you execute steps 1 through 5 and then skip the remaining steps because they require access to an OpenShift Cluster where you have Cluster Admin permissions.**</span>
 
